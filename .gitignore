@@ -1,0 +1,21 @@
+# Зависимости
+node_modules/
+
+# Сборка
+dist/
+build/
+
+# Переменные окружения и секреты
+.env
+.env.local
+.env.*.local
+
+# Vercel CLI
+.vercel/
+
+# Логи и служебные файлы
+*.log
+npm-debug.log*
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
