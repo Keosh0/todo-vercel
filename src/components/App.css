@@ -1,0 +1,124 @@
+.App {
+    max-width: 520px;
+    margin: 48px auto;
+    padding: 0 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 24px;
+}
+
+.input-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.input-container button {
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(#1a8cff, #0063cc);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-item {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: #f7f7f9;
+    border: 1px solid #e5e5ea;
+    border-radius: 6px;
+}
+
+.view-mode,
+.edit-mode {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task-text {
+    flex: 1;
+    font-size: 16px;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 15px;
+    border: 1px solid #1a8cff;
+    border-radius: 4px;
+}
+
+.task-buttons,
+.edit-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.task-item button {
+    width: 32px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-btn { background: #ffc107; }
+.delete-btn { background: #dc3545; }
+.save-btn { background: #28a745; }
+.cancel-btn { background: #e0e0e0; }
+
+.empty,
+.counter {
+    color: #777;
+}
+
+.error {
+    color: #dc3545;
+}
+
+.deploy-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e5ea;
+    font-size: 13px;
+    color: #777;
+}
+
+.badge {
+    padding: 1px 8px;
+    border-radius: 10px;
+    color: #fff;
+    background: #777;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.badge-production { background: #28a745; }
+.badge-preview { background: #1a8cff; }
