@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import TaskInput from "./TaskInput";
-import TaskList from "./TaskList";
 import { getTasks, addTask, updateTask, deleteTask, storageMode } from "../api";
+
+// Ленивая загрузка: код списка задач загружается отдельным файлом,
+// поэтому поле ввода появляется на экране раньше
+const TaskList = lazy(() => import("./TaskList"));
 import "./App.css";
 
 function App() {
@@ -72,11 +75,13 @@ function App() {
                 onAddTask={handleAddTask}
             />
             {error && <p className="error">{error}</p>}
-            <TaskList
-                tasks={tasks}
-                onDeleteTask={handleDeleteTask}
-                onUpdateTask={handleUpdateTask}
-            />
+            <Suspense fallback={<p className="empty">Загрузка списка…</p>}>
+                <TaskList
+                    tasks={tasks}
+                    onDeleteTask={handleDeleteTask}
+                    onUpdateTask={handleUpdateTask}
+                />
+            </Suspense>
             <p className="counter">Задач: {tasks.length}</p>
             <footer className="deploy-info">
                 <span className={`badge badge-${deploy.environment}`}>{deploy.environment}</span>
