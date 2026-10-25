@@ -4,15 +4,19 @@ import TaskList from "./TaskList";
 import { getTasks, addTask, updateTask, deleteTask, storageMode } from "../api";
 import "./App.css";
 
-// Системные переменные Vercel (для Vite платформа передаёт их с префиксом VITE_)
-const DEPLOY_ENV = import.meta.env.VITE_VERCEL_ENV || "local";
-const BRANCH = import.meta.env.VITE_VERCEL_GIT_COMMIT_REF;
-const HAS_API_KEY = Boolean(import.meta.env.VITE_API_KEY);
-
 function App() {
     const [tasks, setTasks] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [error, setError] = useState("");
+    // Сведения о деплое от серверной функции /api/status (на локальном dev-сервере её нет)
+    const [deploy, setDeploy] = useState({ environment: "local", branch: null, apiKeyConfigured: null });
+
+    useEffect(() => {
+        fetch("/api/status")
+            .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`Ошибка ${res.status}`))))
+            .then(setDeploy)
+            .catch(() => {});
+    }, []);
 
     // Загрузка списка задач при монтировании компонента
     useEffect(() => {
@@ -75,10 +79,12 @@ function App() {
             />
             <p className="counter">Задач: {tasks.length}</p>
             <footer className="deploy-info">
-                <span className={`badge badge-${DEPLOY_ENV}`}>{DEPLOY_ENV}</span>
-                {BRANCH && <span>ветка: {BRANCH}</span>}
+                <span className={`badge badge-${deploy.environment}`}>{deploy.environment}</span>
+                {deploy.branch && <span>ветка: {deploy.branch}</span>}
                 <span>хранилище: {storageMode === "server" ? "сервер API" : "браузер (localStorage)"}</span>
-                <span>API-ключ: {HAS_API_KEY ? "задан в переменных окружения" : "не задан"}</span>
+                {deploy.apiKeyConfigured !== null && (
+                    <span>API_KEY на сервере: {deploy.apiKeyConfigured ? "задан ✓" : "не задан"}</span>
+                )}
             </footer>
         </div>
     );

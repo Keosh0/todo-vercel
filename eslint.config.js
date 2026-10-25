@@ -30,4 +30,9 @@ export default [
       ],
     },
   },
+  {
+    // серверные функции Vercel выполняются в Node.js
+    files: ['api/**/*.js'],
+    languageOptions: { globals: globals.node },
+  },
 ]
